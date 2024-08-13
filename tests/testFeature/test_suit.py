@@ -1,14 +1,17 @@
 import pytest
 
 # 导入你希望包括在测试套件中的测试用例
-from base_test import TestLogin
+from tests.testFeature.test_test1 import TestFirst
+from tests.testFeature.test_test2 import TestSec
 
 
 # 创建一个测试套件
 @pytest.mark.usefixtures("setup")
 class AuthSuite:
-    @pytest.mark.parametrize("test_case", [TestLogin])
-    def test_cases(self, test_case):
-        # 运行指定的测试用例
-        test_instance = test_case()
-        test_instance.test_login_functionality()
+    def test_1(self):
+        test_instance = TestFirst()
+        pytest.main(["-v", "tests/testFeature/test_test1.py"])
+
+    def test_2(self):
+        test_instance = TestSec()
+        pytest.main(["-v", "tests/testFeature/test_test2.py"])
