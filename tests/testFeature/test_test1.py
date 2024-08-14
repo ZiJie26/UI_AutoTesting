@@ -24,7 +24,6 @@ class TestFirst(WebDriverSetup):
         element = self.driver.find_element(By.LINK_TEXT, "更多")
         actions = ActionChains(self.driver)
         actions.move_to_element(element).perform()
-        time.sleep(5)
         current_url = self.driver.current_url
         assert "qq.com" in current_url, f"当前 URL 不正确: {current_url}"
         print("测试通过: 当前网站为 baidu.com")

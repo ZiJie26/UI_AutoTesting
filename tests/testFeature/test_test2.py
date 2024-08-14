@@ -21,4 +21,3 @@ class TestSec(WebDriverSetup):
         ).click()
         self.vars["win4315"] = self.wait_for_window(2000)
         self.driver.switch_to.window(self.vars["win4315"])
-        time.sleep(5)
