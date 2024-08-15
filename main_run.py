@@ -3,7 +3,7 @@ import pytest
 import sys
 
 # 获取项目根目录的绝对路径
-project_root = os.path.abspath(os.path.join(os.path.dirname(__file__), ".."))
+project_root = os.path.abspath(os.path.join(os.path.dirname(__file__), "."))
 
 # 添加项目根目录到sys.path
 sys.path.append(project_root)
