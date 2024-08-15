@@ -1,5 +1,4 @@
-import time
-
+import pytest
 from selenium.webdriver.common.action_chains import ActionChains
 from selenium.webdriver.common.by import By
 
@@ -7,6 +6,7 @@ from tools.webdriver_setup import WebDriverSetup
 
 
 class TestFirst(WebDriverSetup):
+    @pytest.mark.demo
     def test_1(self):
         # Test name: 1
         # Step # | name | target | value
