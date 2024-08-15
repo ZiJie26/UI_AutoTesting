@@ -1,5 +1,6 @@
 import logging
 import pytest
+import datetime
 from datetime import datetime
 import os
 from logging.handlers import TimedRotatingFileHandler
@@ -46,13 +47,13 @@ def pytest_addoption(parser):
     )
 
 
-# 获取命令行选项值
 def get_log_retention_days(config):
-    return int(config.getoption("--log-retention"))
+    # 示例：从 config 中获取日志保留天数
+    return config.getoption("--log-retention-days", default=30)
 
 
-# 在测试运行结束时执行日志清理
 def pytest_terminal_summary(terminalreporter, exitstatus, config):
+    log_dir = "logs"  # 请替换为你的日志目录路径
     retention_days = get_log_retention_days(config)
 
     # 清理旧日志文件
@@ -68,12 +69,15 @@ def pytest_terminal_summary(terminalreporter, exitstatus, config):
             logger.error(f"Error removing log file {file}: {e}")
 
     # 打印简短的测试摘要信息到日志中
-    terminal_summary = terminalreporter.summary_stats
-    logger.info("-" * 50 + "Summary" + "-" * 100)  # 添加分割线
-    logger.info(f"Summary: {terminal_summary}")
-    for line in terminalreporter.stats["failed"]:
+    logger.info("-" * 50 + " Summary " + "-" * 50)  # 添加分割线
+    logger.info(f"Summary: {terminalreporter.summary_stats}")
+
+    # 处理 'failed' 键
+    failed_tests = terminalreporter.stats.get("failed", [])
+    for line in failed_tests:
         logger.error(f"Failure: {line}")
-    logger.info("=" * 50 + "executed once" + "=" * 100)  # 添加分割线
+
+    logger.info("=" * 50 + " Executed Once " + "=" * 50)  # 添加分割线
 
 
 def pytest_runtest_logreport(report):
@@ -91,3 +95,13 @@ def pytest_runtest_logreport(report):
 @pytest.fixture(autouse=True)
 def log_test_details(request):
     logger.info(f"Running test: {request.node.name}")
+
+
+@pytest.hookimpl(tryfirst=True)
+def pytest_configure(config):
+    # 获取当前日期
+    date_str = datetime.now().strftime("%Y-%m-%d_%H-%M-%S")
+    # 设置报告文件名
+    report_path = f"report/latest/report_{date_str}.html"
+    # 更新 pytest 的 addopts
+    config.option.htmlpath = report_path
