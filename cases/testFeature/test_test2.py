@@ -1,11 +1,13 @@
 import time
 
+import pytest
 from selenium.webdriver.common.by import By
 
-from tools.webdriver.webdriver_setup import WebDriverSetup
+from tools.webdriver_setup import WebDriverSetup
 
 
 class TestSec(WebDriverSetup):
+    @pytest.mark.demo
     def test_2(self):
         # Test name: 2
         # Step # | name | target | value
@@ -20,4 +22,5 @@ class TestSec(WebDriverSetup):
             By.CSS_SELECTOR, ".hotsearch-item:nth-child(1) .title-content-title"
         ).click()
         self.vars["win4315"] = self.wait_for_window(2000)
-        self.driver.switch_to.window(self.vars["win4315"])
+        self.driver.switch_to.window(self.vars["win4315"])  # type: ignore
+        time.sleep(30)

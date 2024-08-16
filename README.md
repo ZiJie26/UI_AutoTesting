@@ -2,7 +2,8 @@
 
 ## [概况](/)
 
-UI自动化框架
+该项目为本人在实习过程中为公司的“互联网医院”项目所搭建的UI自动化框架
+为了不泄露公司信息，项目中的代码已经删除，只保留项目结构
 
 ## [项目结构](/)
 
@@ -13,55 +14,43 @@ UI自动化框架
 ```plaintext
 project_root/
 │
-├── tests/                        # 主测试目录
-│   ├── auth/                     # 认证模块的测试目录
-│   │   ├── test_login.py         # 登录测试用例
-│   │   ├── test_logout.py        # 登出测试用例
-│   │   └── auth_suite.py         # 认证模块的测试套件脚本
-│   │
-│   ├── search/                   # 搜索模块的测试目录
-│   │   ├── test_search.py        # 搜索功能测试用例
-│   │   └── search_suite.py       # 搜索模块的测试套件脚本
-│   │
-│   ├──conftest.py                  # 日志工具脚本
-│   └── main_run.py               # 统一执行所有测试套件的入口脚本
-│   │
-├── data/                    # 测试数据存储区
-│   ├── auth/                     # 认证模块测试数据
-│   │   ├── login_data.json       # 登录数据
-│   │   └── logout_data.yaml      # 登出数据
-│   │
-│   ├── search/                   # 搜索模块测试数据
-│   │   └── search_data.json      # 搜索数据
+├─pytest.ini                       # pytest 配置文件
+├─main_run.py                      # 统一执行所有测试套件的入口脚本
+├─requirements.txt                 # 项目依赖文件
 │
-├── report/                  # 测试报告生成区
-│   ├── allure-results/           # Allure 报告结果
-│   └── latest/                   # 最新的测试报告
-│       └── report.html           # 最新的测试报告
+├─cases                            # 测试用例脚本目录
+│  ├─data                          # 测试数据存储区
+│  │   └─test_data.json            # 测试数据
+│  │
+│  └─testFeature                   # 功能模块的测试目录
+│      ├─test_test1.py             # 测试用例脚本
+│      └─test_test2.py
 │
-├── tools/                        # 工具存放区
-│   ├── webdriver/                # WebDriver 相关工具
-│   │   └── webdriver_setup.py    # WebDriver 设置脚本
-│   │
-│   └── utils/                    # 通用工具
+├─config                           # 测试配置文件存放区
+│  ├─config.ini                    # 默认配置文件
+│  ├─db_config.yaml                # 数据库配置文件
+│  └─env                           # 环境配置文件
+│      ├─show_config.ini           # 演示环境配置
+│      └─test_config.ini           # 测试环境配置
 │
-├── config/                  # 测试配置文件存放区
-│   ├── config.ini                # 默认配置文件
-│   │
-│   └── env/                      # 环境配置文件
-│       ├── dev_config.ini        # 开发环境配置
-│       └── prod_config.ini       # 生产环境配置
+├─logs                             # 测试日志存放区
+│  └─log_20240815.log              # 测试运行日志
 │
-├── logs/                     # 测试日志存放区
+├─page                             # 页面对象存放区
+│  ├─base_page.py                  # 基础页面类
+│  └─feature                       # 功能模块页面对象目录
 │
-├── pages/                        # 页面对象存放区
-│   ├── base_page.py              # 基础页面类
-│   │
-│   └── auth/                     # 认证模块页面对象
-│       └── login_page.py         # 登录页面对象
+├─report                           # 测试报告生成区
+│  ├─allure-results                # Allure 报告结果
+│  └─latest                        # 最新的测试报告
 │
-├── requirements.txt              # 项目依赖文件
-└── pytest.ini                    # pytest配置文件
+├─suites                           # 测试套件脚本目录
+│  ├─conftest.py                   # 日志生成配置脚本
+│  └─test_suit.py                  # 测试套件脚本
+│
+└─tools                            # 工具存放区
+   ├─webdriver_setup.py            # WebDriver 设置脚本
+   └─utils                         # 通用工具目录
 ```
 
 ## [项目部署](/)
