@@ -8,10 +8,8 @@ from tools.webdriver_setup import WebDriverSetup
 
 
 class TestFirst(WebDriverSetup):
-    @pytest.mark.demo
     def test_1(self):
-        # 打开百度主页
-        self.driver.get("https://www.baidu.com")
+        time.sleep(30)
 
         # 查询数据库获取最新的 code 数据
         try:
