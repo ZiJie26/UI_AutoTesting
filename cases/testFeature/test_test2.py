@@ -7,7 +7,6 @@ from tools.webdriver_setup import WebDriverSetup
 
 
 class TestSec(WebDriverSetup):
-    @pytest.mark.smoke("lalala")
     def test_2(self):
         # Test name: 2
         # Step # | name | target | value
