@@ -1,1 +1,0 @@
-[32mINFO    [0m suites.conftest:conftest.py:97 Running test: test_1
