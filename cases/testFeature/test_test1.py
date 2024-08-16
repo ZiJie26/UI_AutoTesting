@@ -13,7 +13,6 @@ class TestFirst(WebDriverSetup):
         # 1 | open | / |
         self.driver.get("https://www.baidu.com/")
         # 2 | setWindowSize | 1318x1013 |
-        self.driver.set_window_size(1318, 1013)
         # 3 | click | id=kw |
         self.driver.find_element(By.ID, "kw").click()
         # 4 | type | id=kw | 1111
