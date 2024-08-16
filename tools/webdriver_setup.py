@@ -9,9 +9,18 @@ class WebDriverSetup:
     def setup_method(self, method):
         chrome_testing_path = r"D:\Develop\DevelopTools\chrome-win64\chrome.exe"
         chromedriver_path = r"D:\Develop\DevelopTools\chrome-win64\chromedriver.exe"
+        chrome_user_data_dir = (
+            r"C:\Users\ChuZijie\AppData\Local\Google\Chrome for Testing\User Data"
+        )
+
         options = webdriver.ChromeOptions()
         options.binary_location = chrome_testing_path
         options.add_experimental_option("detach", True)
+        options.add_argument(f"user-data-dir={chrome_user_data_dir}")
+        options.add_argument("--profile-directory=Default")  # 指定个人资料，可区分环境
+        # options.add_argument("--headless")  # 启用无头模式
+        options.add_argument("--disable-gpu")  # 在某些情况下，需要禁用GPU加速
+
         service = Service(chromedriver_path)
         self.driver = webdriver.Chrome(service=service, options=options)
         self.vars = {}
