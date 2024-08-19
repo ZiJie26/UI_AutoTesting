@@ -1,7 +1,6 @@
 import os
 import pytest
 import sys
-import subprocess
 
 # 获取项目根目录的绝对路径
 project_root = os.path.abspath(os.path.join(os.path.dirname(__file__), "."))
@@ -12,7 +11,8 @@ sys.path.append(project_root)
 
 def main():
     suite_mapping = {
-        "test": "suites/test_suit.py",
+        "test1": "suites/suit1.py",
+        "test2": "suites/suit2.py",
         # 添加更多的映射
     }
 
