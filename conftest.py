@@ -5,6 +5,8 @@ from datetime import datetime
 import os
 from logging.handlers import TimedRotatingFileHandler
 
+from tools.webdriver_setup import WebDriverSetup
+
 # 创建日志目录
 log_dir = "logs"
 if not os.path.exists(log_dir):
@@ -105,3 +107,13 @@ def pytest_configure(config):
     report_path = f"report/latest/report_{date_str}.html"
     # 更新 pytest 的 addopts
     config.option.htmlpath = report_path
+
+
+@pytest.fixture(scope="function", name="ws")
+def webdriver_setup():
+    setup_instance = WebDriverSetup()
+    setup_instance.setup()
+
+    yield setup_instance
+
+    setup_instance.teardown()

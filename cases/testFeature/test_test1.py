@@ -1,17 +1,14 @@
 import pymysql
 import pytest
-import time
-from selenium.webdriver.common.action_chains import ActionChains
-from selenium.webdriver.common.by import By
 
 from tools.webdriver_setup import WebDriverSetup
 
 
-class Test1(WebDriverSetup):
+class Test1:
     @pytest.mark.demo
-    def test_1(self):
+    def test_1(self, ws):
         # 获取数据库连接
-        connection = self.db_utils.get_connection()
+        connection = ws.db_utils.get_connection()
 
         # 执行查询
         try:
