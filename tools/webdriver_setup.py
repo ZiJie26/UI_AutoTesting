@@ -1,9 +1,9 @@
 import time
 import pymysql
-import json
 from selenium import webdriver
 from selenium.webdriver.chrome.service import Service
 from selenium.webdriver.chrome.options import Options
+from tools.utils.sl_cookies import CookieManager
 
 
 class WebDriverSetup:
@@ -22,20 +22,21 @@ class WebDriverSetup:
         options.add_argument(f"user-data-dir={chrome_user_data_dir}")
         options.add_argument("--profile-directory=Default")  # 指定个人资料，可区分环境
         # options.add_argument("--headless")  # 启用无头模式
+        self.driver.maximize_window()  # 最大化窗口
         # options.add_argument("--window-size=1920,1080")  # 根据你的屏幕分辨率调整
-        options.add_argument("--disable-gpu")  # 在某些情况下，需要禁用GPU加速
+        # options.add_argument("--disable-gpu")  # 在某些情况下，需要禁用GPU加速
 
         # 启动 ChromeDriver 服务
         service = Service(chromedriver_path)
         self.driver = webdriver.Chrome(service=service, options=options)
-        self.driver.maximize_window()
+        self.cookie_manager = CookieManager(self.driver)
         self.vars = {}
 
-        # 自动登录
-        self.login()
+        # 打开被测主页
+        self.index()
 
         # 从文件加载 Cookie
-        # self.load_cookies()
+        # self.cookie_manager.load_cookies()
 
         # 数据库连接
         try:
@@ -52,7 +53,7 @@ class WebDriverSetup:
 
     def teardown_method(self, method):
         # 保存 Cookie 到文件
-        # self.save_cookies()
+        self.cookie_manager.save_cookies()
 
         # 关闭数据库连接
         if hasattr(self, "connection") and self.connection:
@@ -61,22 +62,10 @@ class WebDriverSetup:
         # 关闭浏览器
         self.driver.quit()
 
-    def login(self):
-        # 打开登录页面
-        self.driver.get("https://prkj-test.aidmed.net/hospital-admin/index")
-
-    def save_cookies(self):
-        with open("cookies.json", "w") as file:
-            json.dump(self.driver.get_cookies(), file)
-
-    def load_cookies(self):
-        try:
-            with open("cookies.json", "r") as file:
-                cookies = json.load(file)
-                for cookie in cookies:
-                    self.driver.add_cookie(cookie)
-        except FileNotFoundError:
-            pass
+    def index(self):
+        # 打开主页
+        test_env = "https://prkj-test.aidmed.net/hospital-admin/index"
+        self.driver.get(test_env)
 
     def wait_for_window(self, timeout=2):
         time.sleep(round(timeout / 1000))
