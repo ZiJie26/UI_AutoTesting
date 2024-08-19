@@ -7,10 +7,9 @@ from selenium.webdriver.common.by import By
 from tools.webdriver_setup import WebDriverSetup
 
 
-class TestFirst(WebDriverSetup):
+class Test1(WebDriverSetup):
+    @pytest.mark.demo
     def test_1(self):
-        time.sleep(30)
-
         # 查询数据库获取最新的 code 数据
         try:
             with self.connection.cursor() as cursor:

@@ -6,7 +6,7 @@ from selenium.webdriver.common.by import By
 from tools.webdriver_setup import WebDriverSetup
 
 
-class TestSec(WebDriverSetup):
+class Test2(WebDriverSetup):
     @pytest.mark.demo
     def test_2(self):
         # Test name: 2
@@ -23,4 +23,3 @@ class TestSec(WebDriverSetup):
         ).click()
         self.vars["win4315"] = self.wait_for_window(2000)
         self.driver.switch_to.window(self.vars["win4315"])  # type: ignore
-        time.sleep(30)
