@@ -22,7 +22,6 @@ class WebDriverSetup:
         options.add_argument(f"user-data-dir={chrome_user_data_dir}")
         options.add_argument("--profile-directory=Default")  # 指定个人资料，可区分环境
         # options.add_argument("--headless")  # 启用无头模式
-        self.driver.maximize_window()  # 最大化窗口
         # options.add_argument("--window-size=1920,1080")  # 根据你的屏幕分辨率调整
         # options.add_argument("--disable-gpu")  # 在某些情况下，需要禁用GPU加速
 
@@ -30,6 +29,7 @@ class WebDriverSetup:
         service = Service(chromedriver_path)
         self.driver = webdriver.Chrome(service=service, options=options)
         self.cookie_manager = CookieManager(self.driver)
+        self.driver.maximize_window()  # 最大化窗口
         self.vars = {}
 
         # 打开被测主页
