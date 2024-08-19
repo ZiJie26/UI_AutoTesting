@@ -10,9 +10,12 @@ from tools.webdriver_setup import WebDriverSetup
 class Test1(WebDriverSetup):
     @pytest.mark.demo
     def test_1(self):
-        # 查询数据库获取最新的 code 数据
+        # 获取数据库连接
+        connection = self.db_utils.get_connection()
+
+        # 执行查询
         try:
-            with self.connection.cursor() as cursor:
+            with connection.cursor() as cursor:
                 query = """
                 SELECT
                     id, 

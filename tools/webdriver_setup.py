@@ -1,9 +1,9 @@
 import time
-import pymysql
 from selenium import webdriver
 from selenium.webdriver.chrome.service import Service
 from selenium.webdriver.chrome.options import Options
 from tools.utils.sl_cookies import CookieManager
+from tools.utils.database_utils import DatabaseUtils
 
 
 class WebDriverSetup:
@@ -33,32 +33,22 @@ class WebDriverSetup:
         self.vars = {}
 
         # 打开被测主页
-        self.index()
+        # self.index()
 
         # 从文件加载 Cookie
         # self.cookie_manager.load_cookies()
 
-        # 数据库连接
-        try:
-            self.connection = pymysql.connect(
-                host="192.168.10.210",
-                port=3306,
-                user="root",
-                password="root",
-                database="test_hospital_admin",
-            )
-            print("Connected to MySQL database")
-        except pymysql.MySQLError as e:
-            print(f"Error connecting to MySQL database: {e}")
+        # 初始化数据库连接
+        self.db_utils = DatabaseUtils()
+        self.db_utils.connect()  # 连接数据库
 
     def teardown_method(self, method):
         # 保存 Cookie 到文件
         self.cookie_manager.save_cookies()
 
         # 关闭数据库连接
-        if hasattr(self, "connection") and self.connection:
-            self.connection.close()
-            print("MySQL connection is closed")
+        self.db_utils.close()
+
         # 关闭浏览器
         self.driver.quit()
 
