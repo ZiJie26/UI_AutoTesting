@@ -9,7 +9,7 @@ class CookieManager:
         self.file_path = os.path.join("config", file_name)
 
     def save_cookies(self):
-        """Save cookies to a JSON file."""
+        # 存储 cookies 到 JSON 文件
         os.makedirs(
             os.path.dirname(self.file_path), exist_ok=True
         )  # 确保 config 目录存在
@@ -17,7 +17,7 @@ class CookieManager:
             json.dump(self.driver.get_cookies(), file)
 
     def load_cookies(self):
-        """Load cookies from a JSON file and add them to the browser."""
+        # 从 JSON 文件加载 cookies
         if os.path.exists(self.file_path):
             with open(self.file_path, "r") as file:
                 cookies = json.load(file)
