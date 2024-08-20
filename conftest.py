@@ -5,7 +5,9 @@ from datetime import datetime
 import os
 from logging.handlers import TimedRotatingFileHandler
 
-from tools.webdriver_setup import WebDriverSetup
+from tools.cleanup_utils import cleanup_reports
+from tools.database_utils import DatabaseUtils
+from tools.webdriver_tools import WebDriverTools
 
 # 创建日志目录
 log_dir = "logs"
@@ -109,11 +111,26 @@ def pytest_configure(config):
     config.option.htmlpath = report_path
 
 
+@pytest.fixture(scope="session")
+def db_utils():
+    db_utils_instance = DatabaseUtils()
+    db_utils_instance.connect()
+    yield db_utils_instance
+    db_utils_instance.close()
+
+
 @pytest.fixture(scope="function", name="ws")
-def webdriver_setup():
-    setup_instance = WebDriverSetup()
-    setup_instance.setup()
+def webdriver_setup(db_utils):
+    ws_gen = WebDriverTools.webdriver_setup(db_utils)
+    ws = next(ws_gen)  # 获取生成器返回的字典
+    yield ws  # 将字典传递给测试用例
+    try:
+        next(ws_gen)  # 执行清理逻辑
+    except StopIteration:
+        pass
 
-    yield setup_instance
 
-    setup_instance.teardown()
+@pytest.fixture(autouse=True)
+def cleanup_reports_fixture():
+    reports_directory = "report/latest"
+    cleanup_reports(reports_directory, days=7)

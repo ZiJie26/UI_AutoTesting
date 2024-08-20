@@ -1,3 +1,5 @@
+# tools\cleanup_utils.py
+
 import os
 import datetime
 
@@ -19,8 +21,3 @@ def cleanup_reports(directory, days=7):
             if file_mtime < cutoff:
                 os.remove(file_path)
                 print(f"Deleted: {file_path}")
-
-
-if __name__ == "__main__":
-    reports_directory = "report/latest"
-    cleanup_reports(reports_directory, days=7)  # 清理7天之前的报告

@@ -1,14 +1,14 @@
 import pymysql
 import pytest
 
-from tools.webdriver_setup import WebDriverSetup
-
 
 class Test1:
     @pytest.mark.demo
     def test_1(self, ws):
+        driver = ws["driver"]
+        driver.get("https://www.baidu.com")
         # 获取数据库连接
-        connection = ws.db_utils.get_connection()
+        connection = ws["db_connection"]
 
         # 执行查询
         try:
