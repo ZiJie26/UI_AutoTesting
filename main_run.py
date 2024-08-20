@@ -16,8 +16,14 @@ def main():
         # 添加更多的映射
     }
 
-    if len(sys.argv) > 1 and sys.argv[1] in suite_mapping:
-        pytest.main([suite_mapping[sys.argv[1]]])
+    # 收集所有有效的测试套件路径
+    test_suites = []
+    for arg in sys.argv[1:]:
+        if arg in suite_mapping:
+            test_suites.append(suite_mapping[arg])
+
+    if test_suites:
+        pytest.main(test_suites)
     else:
         pytest.main()
 

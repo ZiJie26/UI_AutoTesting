@@ -2,7 +2,6 @@ import time
 from selenium import webdriver
 from selenium.webdriver.chrome.service import Service
 from tools.sl_cookies import CookieManager
-from tools.database_utils import DatabaseUtils
 
 
 class WebDriverSetup:
@@ -37,16 +36,9 @@ class WebDriverSetup:
         # 从文件加载 Cookie
         # self.cookie_manager.load_cookies()
 
-        # 初始化数据库连接
-        # self.db_utils = DatabaseUtils()
-        # self.db_utils.connect()  # 连接数据库
-
     def teardown_method(self, method):
         # 保存 Cookie 到文件
         self.cookie_manager.save_cookies()
-
-        # 关闭数据库连接
-        # self.db_utils.close()
 
         # 关闭浏览器
         self.driver.quit()
