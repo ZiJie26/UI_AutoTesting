@@ -1,11 +1,19 @@
 import time
 from selenium.webdriver.support.wait import WebDriverWait
 
+from tools.webdriver_setup import WebDriverSetup
 
-class Base:
 
-    def __init__(self, driver):
-        self.driver = driver
+class Base(WebDriverSetup):
+
+    # 如果你需要在 Base 类中增加额外的设置，请使用 setup_method
+    def setup_method(self, method):
+        super().setup_method(method)
+        # 你可以在这里增加 Base 类特有的设置代码，比如元素定位器初始化等
+
+    def teardown_method(self, method):
+        # 先执行清理任务，然后调用父类的 teardown_method
+        super().teardown_method(method)
 
     # 查找元素方法 封装
     def base_find(self, loc, timeout=30, poll=0.5):

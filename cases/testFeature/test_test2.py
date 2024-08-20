@@ -1,12 +1,10 @@
-import time
-
 import pytest
 from selenium.webdriver.common.by import By
 
-from tools.webdriver_setup import WebDriverSetup
+from page.base_page import Base
 
 
-class Test2(WebDriverSetup):
+class Test2(Base):
     @pytest.mark.demo
     def test_2(self):
         # Test name: 2

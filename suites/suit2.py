@@ -1,5 +1,4 @@
 # 导入你希望包括在测试套件中的测试用例
-from cases.testFeature.test_test1 import Test1
 from cases.testFeature.test_test2 import Test2
 
 
