@@ -1,6 +1,8 @@
+import os
 import time
 from selenium.webdriver.support.wait import WebDriverWait
 
+from tools.cleanup_utils import cleanup_reports
 from tools.webdriver_setup import WebDriverSetup
 
 
@@ -10,6 +12,15 @@ class Base(WebDriverSetup):
     def setup_method(self, method):
         super().setup_method(method)
         # 你可以在这里增加 Base 类特有的设置代码，比如元素定位器初始化等
+        # 构建报告文件夹的绝对路径
+        current_file_path = os.path.abspath(__file__)
+        project_root = os.path.dirname(
+            os.path.dirname(current_file_path)
+        )  # 获取项目根目录
+        reports_directory = os.path.join(project_root, "report", "latest")  # 绝对路径
+
+        # 清理超过7天的报告文件
+        cleanup_reports(reports_directory, days=7)
 
     def teardown_method(self, method):
         # 先执行清理任务，然后调用父类的 teardown_method
