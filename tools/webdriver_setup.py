@@ -1,3 +1,5 @@
+import json
+import os
 import time
 from selenium import webdriver
 from selenium.webdriver.chrome.service import Service
@@ -6,12 +8,19 @@ from tools.sl_cookies import CookieManager
 
 class WebDriverSetup:
     def setup_method(self, method):
-        # Chrome 和 ChromeDriver 的路径
-        chrome_testing_path = r"D:\Develop\DevelopTools\chrome-win64\chrome.exe"
-        chromedriver_path = r"D:\Develop\DevelopTools\chrome-win64\chromedriver.exe"
-        chrome_user_data_dir = (
-            r"C:\Users\ChuZijie\AppData\Local\Google\Chrome for Testing\User Data"
-        )
+        # 获取 webdriver_setup.py 文件的绝对路径
+        current_dir = os.path.dirname(os.path.abspath(__file__))
+
+        # 构建相对于当前文件的配置文件路径
+        config_file_path = os.path.join(current_dir, "../config/dev_paths.json")
+
+        # 从配置文件中加载路径信息
+        with open(config_file_path, "r") as f:
+            paths = json.load(f)
+
+        chrome_testing_path = paths["chrome_testing_path"]
+        chromedriver_path = paths["chromedriver_path"]
+        chrome_user_data_dir = paths["chrome_user_data_dir"]
 
         # 配置 Chrome 选项
         options = webdriver.ChromeOptions()
