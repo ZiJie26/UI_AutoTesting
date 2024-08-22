@@ -12,7 +12,7 @@ class WebDriverSetup:
         current_dir = os.path.dirname(os.path.abspath(__file__))
 
         # 构建相对于当前文件的配置文件路径
-        config_file_path = os.path.join(current_dir, "../config/dev_paths.json")
+        config_file_path = os.path.join(current_dir, "../config/test_paths.json")
 
         # 从配置文件中加载路径信息
         with open(config_file_path, "r") as f:
