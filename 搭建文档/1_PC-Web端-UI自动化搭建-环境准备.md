@@ -5,9 +5,11 @@
   - [脚本编写环境准备](#脚本编写环境准备)
     - [Anaconda](#anaconda)
     - [Pycharm](#pycharm)
+  - [其余工具](#其余工具)
     - [Chrome for Testing \& ChromeDriver](#chrome-for-testing--chromedriver)
     - [Selenium IDE](#selenium-ide)
-  - [脚本运行](#脚本运行)
+    - [allure](#allure)
+    - [Jenkins](#jenkins)
 
 ## 脚本编写环境准备
 
@@ -17,7 +19,7 @@
 
 ![2](https://i-blog.csdnimg.cn/direct/5568383bedc448a1b3c14b450d543b31.png)
 
-**！把自己的安装路径记下来！**
+**把自己的安装路径记下来！下面要用。**
 
 ![1](https://i-blog.csdnimg.cn/direct/ebc0bc7229f942ee969c83097bf88f18.png)
 
@@ -52,46 +54,18 @@ Pycharm社区版
 
 点击确定
 
-然后我们新建一个项目安装相关包顺便测试一下
-
-![在这里插入图片描述](https://i-blog.csdnimg.cn/direct/d2968bcdbb3a421195ec08e2582ec927.png)
-
-![在这里插入图片描述](https://i-blog.csdnimg.cn/direct/2e2e6302926542aeb678489cc3328146.png)
-
-![在这里插入图片描述](https://i-blog.csdnimg.cn/direct/5639a62f65fa4255808243ea422cbaee.png)
-
-![在这里插入图片描述](https://i-blog.csdnimg.cn/direct/141e01dcd53d4137bea00de146ca2987.png)
-
-创建好文件之后先看这里确认一下是不是正确的环境
-
-![在这里插入图片描述](https://i-blog.csdnimg.cn/direct/a51ee79c55434c5d88a188245869ae91.png)
-
-打开终端![在这里插入图片描述](https://i-blog.csdnimg.cn/direct/c98335d14f5d483e837f006b377aad53.png)
-
-在这里打开终端就很省事，会自动进入对应环境，不用在cmd输命令进入环境也不用在anaconda等他那又臭又长的加载
-
-输入
-
-```bash
-pip install pytest
-```
-
-```bash
-pip install selenium
-```
-
-这两个安装完后可以`pip list`查看
-
-![在这里插入图片描述](https://i-blog.csdnimg.cn/direct/a8dec2f45eee41c1b46c5953f64eeec3.png)
+## 其余工具
 
 ### Chrome for Testing & ChromeDriver
+
+> 谷歌推出的专用于测试的浏览器和驱动
 
 [下载地址](https://googlechromelabs.github.io/chrome-for-testing/#stable)
 把这两个链接粘贴到地址栏下载得到两个压缩包
 
 ![在这里插入图片描述](https://i-blog.csdnimg.cn/direct/c3d5e90c206148f1bbb644c989381f37.png)
 
-把chrome解压到任意地址，比如我的就是：
+把chrome解压到任意地址（但是最好是C盘下面，因为这个项目配置的是C盘下面的地址）：
 
 ![在这里插入图片描述](https://i-blog.csdnimg.cn/direct/e27a329144944b89bfd283449ad6ecf0.png)
 
@@ -103,13 +77,15 @@ pip install selenium
 
 ### Selenium IDE
 
-双击这个打开测试浏览器
+>用于录制操作，快速生成脚本，减少工作量
+
+双击这个打开测试浏览器,下面的操作都在测试浏览器里进行
 
 ![在这里插入图片描述](https://i-blog.csdnimg.cn/direct/fced8391e1b04e13bbe8832bf5802888.png)
 
-有梯子去[这里](https://chromewebstore.google.com/detail/selenium-ide/mooikfkahbdckldjjndioackbalphokd?hl=zh-CN)安装
+有梯子去这里<https://chromewebstore.google.com/detail/selenium-ide/mooikfkahbdckldjjndioackbalphokd?hl=zh-CN>安装
 
-没梯子去[这里](https://www.chajianxw.com/developer/30773.html)安装
+没梯子去这里<https://www.chajianxw.com/developer/30773.html>安装
 
 安装完之后可以把它固定显示
 
@@ -132,41 +108,41 @@ pip install selenium
 
 ![在这里插入图片描述](https://i-blog.csdnimg.cn/direct/887db633edd74bf485cf83d50f2ae4b4.png)
 
-## 脚本运行
+点击export导出py脚本
 
-导出的文件复制到刚刚创建的项目里（或者代码复制到之前创建的test.py也可以）
+### allure
 
-![在这里插入图片描述](https://i-blog.csdnimg.cn/direct/e15e40ae5781489e80a59c6d158ed91f.png)
+>本地部署的allure，用于本地查看生成的allure报告
+>>allure可以生成比较明了的执行报告，后面部署到Jenkins上时会用到allure插件，这个可以使本地调试的时候查看allure报告
 
-由于我们的浏览器是放在自定义目录下的，所以在启动项这里要做一些配置，简而言之，把红色方形里的代码
+这里（<https://github.com/allure-framework/allure2/releases/tag/2.30.0>）下载：
 
-![在这里插入图片描述](https://i-blog.csdnimg.cn/direct/c070223a64c242ae9f2475e6adbb6ad0.png)
+![20240828165932](https://raw.githubusercontent.com/ZiJie26/picgo-win/main/1_PC-Web端-UI自动化搭建-环境准备/20240828165932.png)
 
-替换成
+解压放到你能记住的路径
 
-```python
-    def setup_method(self, method):
-        # Chrome测试版的路径
-        chrome_testing_path = r"D:\Develop\DevelopTools\chrome-win64\chrome.exe"#改成你自己的路径！
-        # Chromedriver的路径
-        chromedriver_path = r"D:\Develop\DevelopTools\chrome-win64\chromedriver.exe"#改成你自己的路径！
-        # 设置Chrome选项
-        options = webdriver.ChromeOptions()
-        options.binary_location = chrome_testing_path
-        options.add_experimental_option("detach", True)
-        # 设置WebDriver服务
-        service = Service(chromedriver_path)
-        # 创建Chrome WebDriver实例
-        self.driver = webdriver.Chrome(service=service, options=options)
-        self.vars = {}
-```
+![20240828173432](https://raw.githubusercontent.com/ZiJie26/picgo-win/main/1_PC-Web端-UI自动化搭建-环境准备/20240828173432.png)
 
-**注意把chrome和chromedriver的路径改成自己的！**
+双击打开`allure.bat`
 
-最后在终端里输入 `pytest`+脚本文件名 执行脚本
+![20240828173538](https://raw.githubusercontent.com/ZiJie26/picgo-win/main/1_PC-Web端-UI自动化搭建-环境准备/20240828173538.png)
 
-![在这里插入图片描述](https://i-blog.csdnimg.cn/direct/15f1e2fdaefa4fa98b05c70eaea5430d.png)
+然后去系统变量添加这个bin文件夹：
 
-执行成功，代表环境准备完毕
+![20240828173728](https://raw.githubusercontent.com/ZiJie26/picgo-win/main/1_PC-Web端-UI自动化搭建-环境准备/20240828173728.png)
 
-![在这里插入图片描述](https://i-blog.csdnimg.cn/direct/dd4ef6976b8f45dd9f49db8498748888.png)
+确定完可以去cmd确认一下是否添加成功：
+
+![20240828175224](https://raw.githubusercontent.com/ZiJie26/picgo-win/main/1_PC-Web端-UI自动化搭建-环境准备/20240828175224.png)
+
+### Jenkins
+
+>CI/CD持续集成发布工具
+
+到这里（<https://www.jenkins.io/download/>）下载
+
+![20240828180558](https://raw.githubusercontent.com/ZiJie26/picgo-win/main/1_PC-Web端-UI自动化搭建-环境准备/20240828180558.png)
+
+下载完之后安装，这个地方选第一个：
+
+![20240828182658](https://raw.githubusercontent.com/ZiJie26/picgo-win/main/1_PC-Web端-UI自动化搭建-环境准备/20240828182658.png)
