@@ -56,28 +56,29 @@ project_root/
 
 ## [项目部署](/)
 
-本项目基于Python 3.8.19,使用到的包有：
+本项目基于Python 3.8.19,主要使用了Selenium，Pytest，Allure等包
 
 ### [快速部署](/)
 
 1. 克隆项目到本地
 2. 安装项目依赖：`pip install -r requirements.txt`
-3. 运行tests/main_run.py文件，执行所有测试用例
+3. 在case目录下添加用例脚本，在suites下添加测试套件，在main_run.py添加要执行的套件
+4. 运行tests/main_run.py文件，执行所有测试用例
 
-### [详细部署](/)
+### [详细使用方法](/)
 
-请查看下列文档，其中包含详细的部署步骤和说明。
-[搭建文档1](./搭建文档/1_PC%20Web端%20UI自动化搭建（1）环境准备.md)
+**请查看下列文档，其中包含详细的部署步骤和使用说明。**
+[搭建文档1](./搭建文档/1_PC-Web端-UI自动化搭建-环境准备.md)
+[搭建文档2](./搭建文档/2_PC-Web端-UI自动化搭建-使用方法.md)
 
 ## [编码规范](/)
 
 * 统一使用python 3.8
-* 编码使用-\*- coding:utf8 -\*-,且不指定解释器
+* 编码使用`coding:utf8`,且不指定解释器
 * 类/方法的注释均写在class/def下一行，并且用三个双引号形式注释
 * 局部代码注释使用#号
 * 所有中文都直接使用字符串，不转换成Unicode，即不是用【u'中文'】编写
 * 所有的测试模块文件都以test_projectName_moduleName.py命名
 * 所有的测试类都以Test开头，类中方法(用例)都以test_开头
-* 每个测试项目都在cases目录里创建一个目录，且目录都包含有api、scenrarios两个目录
-* case对应setup/teardown的fixture统一命名成fixture_[test_case_method_name]
+* 每个测试项目都在cases目录里创建一个目录
 * 每一个模块中测试用例如果有顺序要求【主要针对ui自动化测试】，则自上而下排序，pytest在单个模块里会自上而下按顺序执行

@@ -3,6 +3,7 @@
 
 - [PC Web端 UI自动化搭建（1）本地环境准备](#pc-web端-ui自动化搭建1本地环境准备)
   - [脚本编写环境准备](#脚本编写环境准备)
+    - [Git](#git)
     - [Anaconda](#anaconda)
     - [Pycharm](#pycharm)
   - [其余工具](#其余工具)
@@ -14,6 +15,12 @@
 
 ## 脚本编写环境准备
 
+### Git
+
+> 版本控制工具
+
+这里<https://git-scm.com/downloads>下载安装就好
+
 ### Anaconda
 
 > python 环境管理软件
@@ -22,7 +29,7 @@
 
 ![2](https://i-blog.csdnimg.cn/direct/5568383bedc448a1b3c14b450d543b31.png)
 
-**把自己的安装路径记下来！下面要用。**
+**把自己的安装路径记下来！后面要用。**
 
 ![1](https://i-blog.csdnimg.cn/direct/ebc0bc7229f942ee969c83097bf88f18.png)
 
@@ -44,20 +51,6 @@ Pycharm社区版
 ![社区版](https://i-blog.csdnimg.cn/direct/b78612139adc4ecebcd6846ba0f04c85.png)
 
 安装过程不再赘述
-
-按照下图点击
-
-![在这里插入图片描述](https://i-blog.csdnimg.cn/direct/ee2b0a693d904efc96b0e45c25f95957.png)
-
-![在这里插入图片描述](https://i-blog.csdnimg.cn/direct/3206214a96b84a7094f767033a702261.png)
-
-![在这里插入图片描述](https://i-blog.csdnimg.cn/direct/6242a257e46c4f7982e24b8f67ef08aa.png)
-
-我们创建一个新的环境
-
-![在这里插入图片描述](https://i-blog.csdnimg.cn/direct/aeb6476fe3fa43a2aaa51a081e87e523.png)
-
-点击确定
 
 ## 其余工具
 
@@ -91,29 +84,6 @@ Pycharm社区版
 有梯子去这里<https://chromewebstore.google.com/detail/selenium-ide/mooikfkahbdckldjjndioackbalphokd?hl=zh-CN>安装
 
 没梯子去这里<https://www.chajianxw.com/developer/30773.html>安装
-
-安装完之后可以把它固定显示
-
-![在这里插入图片描述](https://i-blog.csdnimg.cn/direct/b5fe196bc27c4d429e80ab9c2c9f2715.png)
-
-点击上图3号箭头打开下图页面，点第三个选项新建一个Project
-
-![在这里插入图片描述](https://i-blog.csdnimg.cn/direct/608c9bcc1ca04b7cbe3ce04e735d8c53.png)
-
-![在这里插入图片描述](https://i-blog.csdnimg.cn/direct/a980584d96ae4829925d7b1c7f2c524f.png)
-
-点击录制之后会弹出被测网站的新窗口，在那个窗口进行你的测试操作（**建议不要有多余操作**）
-
-下图就是在百度首页输入“hi”然后回车后录制下来的内容：
-
-![在这里插入图片描述](https://i-blog.csdnimg.cn/direct/ecdba1e1479541cd8a78a1c578a17dcf.png)
-**注意！有些情况下这个插件并不能成功复现你的操作，是插件的问题，这时候就需要导出成脚本在本地运行了**
-
-![在这里插入图片描述](https://i-blog.csdnimg.cn/direct/e46a90e1db0143fc812bbe73f980647e.png)
-
-![在这里插入图片描述](https://i-blog.csdnimg.cn/direct/887db633edd74bf485cf83d50f2ae4b4.png)
-
-点击export导出py脚本
 
 ### allure
 
